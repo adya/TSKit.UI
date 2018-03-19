@@ -1,7 +1,7 @@
 /// A set of methods extending `UITableView`.
 /// - Since: 11/08/2017
 /// - Author: AdYa
-extension UITableView {
+public extension UITableView {
     
     /// Forces `UITableView` to recalculate it's `contentSize` therefore to update cell heights.
     /// Changes displayed immediately with animations.

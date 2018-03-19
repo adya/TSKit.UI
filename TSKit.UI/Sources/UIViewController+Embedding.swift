@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIViewController {
+public extension UIViewController {
 
     /// Embeds passed `UIViewController` into current `UIViewController`.
     /// - Parameter controller: Screen to be embeded into `UIViewController`.

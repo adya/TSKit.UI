@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		006182B920603EA60079DD8C /* TSKit_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006182B820603EA60079DD8C /* TSKit_Core.framework */; };
 		006182BB20603F390079DD8C /* TSKit_Log.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006182BA20603F390079DD8C /* TSKit_Log.framework */; };
-		006182CC206046EC0079DD8C /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 006182CA206046EB0079DD8C /* Cartfile */; };
 		00C2C4C11FE5C4A600721731 /* TSKit_UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C2C4B71FE5C4A600721731 /* TSKit_UI.framework */; };
 		00C2C4C61FE5C4A600721731 /* TSKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C4C51FE5C4A600721731 /* TSKit_UITests.swift */; };
 		00C2C4C81FE5C4A600721731 /* TSKit_UI.h in Headers */ = {isa = PBXBuildFile; fileRef = 00C2C4BA1FE5C4A600721731 /* TSKit_UI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		00C2C5041FE5C56200721731 /* ExpandedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C4F31FE5C56200721731 /* ExpandedTableView.swift */; };
 		00C2C5061FE5C56200721731 /* InsetableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C4F51FE5C56200721731 /* InsetableTextField.swift */; };
 		00C2C5081FE5C56200721731 /* CompletionStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C4F71FE5C56200721731 /* CompletionStoryboardSegue.swift */; };
 		00C2C5091FE5C56200721731 /* TSPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C4F81FE5C56200721731 /* TSPageControl.swift */; };
@@ -48,10 +46,8 @@
 		00C2C4C01FE5C4A600721731 /* TSKit.UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TSKit.UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00C2C4C51FE5C4A600721731 /* TSKit_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSKit_UITests.swift; sourceTree = "<group>"; };
 		00C2C4C71FE5C4A600721731 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00C2C4F31FE5C56200721731 /* ExpandedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedTableView.swift; sourceTree = "<group>"; };
 		00C2C4F41FE5C56200721731 /* _TSOptionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _TSOptionButton.swift; sourceTree = "<group>"; };
 		00C2C4F51FE5C56200721731 /* InsetableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetableTextField.swift; sourceTree = "<group>"; };
-		00C2C4F61FE5C56200721731 /* _UIImage+GIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "_UIImage+GIF.swift"; sourceTree = "<group>"; };
 		00C2C4F71FE5C56200721731 /* CompletionStoryboardSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionStoryboardSegue.swift; sourceTree = "<group>"; };
 		00C2C4F81FE5C56200721731 /* TSPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSPageControl.swift; sourceTree = "<group>"; };
 		00C2C4F91FE5C56200721731 /* UIViewEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewEx.swift; sourceTree = "<group>"; };
@@ -130,14 +126,12 @@
 			isa = PBXGroup;
 			children = (
 				00CCB2951FE6C2B800F1E75C /* UIKit+Identifiable */,
-				00C2C4F31FE5C56200721731 /* ExpandedTableView.swift */,
 				00C2C4FC1FE5C56200721731 /* _TSCollaspableTableView.swift */,
 				00C2C4F41FE5C56200721731 /* _TSOptionButton.swift */,
 				00C2C4F81FE5C56200721731 /* TSPageControl.swift */,
 				00C2C5001FE5C56200721731 /* TSPageViewController */,
 				00C2C4F71FE5C56200721731 /* CompletionStoryboardSegue.swift */,
 				00C2C4F51FE5C56200721731 /* InsetableTextField.swift */,
-				00C2C4F61FE5C56200721731 /* _UIImage+GIF.swift */,
 				00C2C4FD1FE5C56200721731 /* UITableViewEx.swift */,
 				00C2C4FF1FE5C56200721731 /* UIViewController+Embedding.swift */,
 				00C2C4F91FE5C56200721731 /* UIViewEx.swift */,
@@ -268,7 +262,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006182CC206046EC0079DD8C /* Cartfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +280,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				00C2C50F1FE5C56300721731 /* UIKit+Identifiable.swift in Sources */,
-				00C2C5041FE5C56200721731 /* ExpandedTableView.swift in Sources */,
 				00C2C5081FE5C56200721731 /* CompletionStoryboardSegue.swift in Sources */,
 				00C2C50A1FE5C56200721731 /* UIViewEx.swift in Sources */,
 				00C2C5101FE5C56300721731 /* UIViewController+Embedding.swift in Sources */,

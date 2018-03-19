@@ -1,5 +1,5 @@
 import TSKit_Core
-import TSKit_MVVM
+//import TSKit_MVVM
 
 /**
  This extension uses `Identifiable` to provide simplified type-safe dequeueing of `UITableViewCell` and `UITableViewHeaderFooterView` and their subclasses.
@@ -21,17 +21,17 @@ public protocol TableViewElement : Identifiable {
     var dynamicHeight : CGFloat {get}
 }
 
-/// Adds to `TableViewElement` an ability to measure its `height` based on supported `dataSource` when it is conforming to `Configurable`.
-public protocol ConfigurableTableViewElement : TableViewElement, Configurable {
-    
-    /// Calculates minimum height to fit content provided in `dataSource`.
-    /// - Note: By default this method returns base desired `height` of `TableViewElement`.
-    /// - Parameter dataSource: A data source for which `height` will be calculated.
-    /// - Parameter frameWidth: Desired width of the `TableViewElement`.
-    /// - Returns: Minimum `height` of the `TableViewElement` to fit content of `DataSource`.
-    static func height(with dataSource: Self.DataSourceType, frameWidth: CGFloat) -> CGFloat
-    
-}
+///// Adds to `TableViewElement` an ability to measure its `height` based on supported `dataSource` when it is conforming to `Configurable`.
+//public protocol ConfigurableTableViewElement : TableViewElement, Configurable {
+//
+//    /// Calculates minimum height to fit content provided in `dataSource`.
+//    /// - Note: By default this method returns base desired `height` of `TableViewElement`.
+//    /// - Parameter dataSource: A data source for which `height` will be calculated.
+//    /// - Parameter frameWidth: Desired width of the `TableViewElement`.
+//    /// - Returns: Minimum `height` of the `TableViewElement` to fit content of `DataSource`.
+//    static func height(with dataSource: Self.DataSourceType, frameWidth: CGFloat) -> CGFloat
+//
+//}
 
 public extension TableViewElement {
     public var dynamicHeight : CGFloat {

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		006182B920603EA60079DD8C /* TSKit_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006182B820603EA60079DD8C /* TSKit_Core.framework */; };
 		006182BB20603F390079DD8C /* TSKit_Log.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006182BA20603F390079DD8C /* TSKit_Log.framework */; };
+		00A052282102124A00A2D648 /* UISplitViewControllerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A052272102124A00A2D648 /* UISplitViewControllerEx.swift */; };
+		00A0522E210379CD00A2D648 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A0522D210379CD00A2D648 /* BorderedButton.swift */; };
 		00C2C4C11FE5C4A600721731 /* TSKit_UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C2C4B71FE5C4A600721731 /* TSKit_UI.framework */; };
 		00C2C4C61FE5C4A600721731 /* TSKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C4C51FE5C4A600721731 /* TSKit_UITests.swift */; };
 		00C2C4C81FE5C4A600721731 /* TSKit_UI.h in Headers */ = {isa = PBXBuildFile; fileRef = 00C2C4BA1FE5C4A600721731 /* TSKit_UI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +42,9 @@
 		006182B820603EA60079DD8C /* TSKit_Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSKit_Core.framework; path = Carthage/Build/iOS/TSKit_Core.framework; sourceTree = "<group>"; };
 		006182BA20603F390079DD8C /* TSKit_Log.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSKit_Log.framework; path = Carthage/Build/iOS/TSKit_Log.framework; sourceTree = "<group>"; };
 		006182CA206046EB0079DD8C /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		0061832F206085CF0079DD8C /* Designables */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Designables; sourceTree = "<group>"; };
+		00A052272102124A00A2D648 /* UISplitViewControllerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerEx.swift; sourceTree = "<group>"; };
+		00A0522D210379CD00A2D648 /* BorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		00C2C4B71FE5C4A600721731 /* TSKit_UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TSKit_UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		00C2C4BA1FE5C4A600721731 /* TSKit_UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKit_UI.h; sourceTree = "<group>"; };
 		00C2C4BB1FE5C4A600721731 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,6 +110,7 @@
 		00C2C4B91FE5C4A600721731 /* TSKit.UI */ = {
 			isa = PBXGroup;
 			children = (
+				0061832F206085CF0079DD8C /* Designables */,
 				00C2C4F21FE5C55700721731 /* Sources */,
 				006182CA206046EB0079DD8C /* Cartfile */,
 				00C2C4BA1FE5C4A600721731 /* TSKit_UI.h */,
@@ -135,6 +141,8 @@
 				00C2C4FD1FE5C56200721731 /* UITableViewEx.swift */,
 				00C2C4FF1FE5C56200721731 /* UIViewController+Embedding.swift */,
 				00C2C4F91FE5C56200721731 /* UIViewEx.swift */,
+				00A052272102124A00A2D648 /* UISplitViewControllerEx.swift */,
+				00A0522D210379CD00A2D648 /* BorderedButton.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -285,6 +293,8 @@
 				00C2C5101FE5C56300721731 /* UIViewController+Embedding.swift in Sources */,
 				00C2C50E1FE5C56300721731 /* UITableViewEx.swift in Sources */,
 				00C2C50C1FE5C56300721731 /* UITableView+Identifiable.swift in Sources */,
+				00A0522E210379CD00A2D648 /* BorderedButton.swift in Sources */,
+				00A052282102124A00A2D648 /* UISplitViewControllerEx.swift in Sources */,
 				00C2C5111FE5C56300721731 /* TSPageViewController.swift in Sources */,
 				00C2C5091FE5C56200721731 /* TSPageControl.swift in Sources */,
 				00C2C50B1FE5C56200721731 /* UICollectionView+Identifiable.swift in Sources */,

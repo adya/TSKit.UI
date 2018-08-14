@@ -21,7 +21,7 @@ public protocol TableViewElement : Identifiable {
     var dynamicHeight : CGFloat {get}
 }
 
-///// Adds to `TableViewElement` an ability to measure its `height` based on supported `dataSource` when it is conforming to `Configurable`.
+/// Adds to `TableViewElement` an ability to measure its `height` based on supported `dataSource` when it is conforming to `Configurable`.
 //public protocol ConfigurableTableViewElement : TableViewElement, Configurable {
 //
 //    /// Calculates minimum height to fit content provided in `dataSource`.

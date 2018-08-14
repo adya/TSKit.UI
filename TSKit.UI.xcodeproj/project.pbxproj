@@ -42,7 +42,6 @@
 		006182B820603EA60079DD8C /* TSKit_Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSKit_Core.framework; path = Carthage/Build/iOS/TSKit_Core.framework; sourceTree = "<group>"; };
 		006182BA20603F390079DD8C /* TSKit_Log.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSKit_Log.framework; path = Carthage/Build/iOS/TSKit_Log.framework; sourceTree = "<group>"; };
 		006182CA206046EB0079DD8C /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
-		0061832F206085CF0079DD8C /* Designables */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Designables; sourceTree = "<group>"; };
 		00A052272102124A00A2D648 /* UISplitViewControllerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerEx.swift; sourceTree = "<group>"; };
 		00A0522D210379CD00A2D648 /* BorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		00C2C4B71FE5C4A600721731 /* TSKit_UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TSKit_UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +109,6 @@
 		00C2C4B91FE5C4A600721731 /* TSKit.UI */ = {
 			isa = PBXGroup;
 			children = (
-				0061832F206085CF0079DD8C /* Designables */,
 				00C2C4F21FE5C55700721731 /* Sources */,
 				006182CA206046EB0079DD8C /* Cartfile */,
 				00C2C4BA1FE5C4A600721731 /* TSKit_UI.h */,

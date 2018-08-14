@@ -14,9 +14,9 @@
 
 import UIKit
 
-public protocol TSPageControlDelegate {
+public protocol TSPageControlDelegate: class {
     func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int)
-
+    
     func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int)
 }
 
@@ -25,7 +25,7 @@ public protocol TSPageControlDelegate {
 public extension TSPageControlDelegate {
     func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
     }
-
+    
     func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, atIndex index: Int) {
     }
 }
@@ -42,9 +42,9 @@ public enum TSPageControlIndicatorType {
 
 @IBDesignable
 public class TSPageControl: UIView {
-
-    public var delegate: TSPageControlDelegate?
-
+    
+    public weak var delegate: TSPageControlDelegate?
+    
     @IBInspectable public var insetsConstant: CGFloat {
         get {
             return self.insets.top
@@ -53,13 +53,13 @@ public class TSPageControl: UIView {
             self.insets = UIEdgeInsets(top: value, left: value, bottom: value, right: value)
         }
     }
-
+    
     @IBInspectable public var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
         didSet {
             self.setNeedsLayout()
         }
     }
-
+    
     @IBInspectable public var indicatorsCount: Int = 0 {
         didSet {
             self.reset()
@@ -75,23 +75,23 @@ public class TSPageControl: UIView {
             self.setNeedsLayout()
         }
     }
-
+    
     public var indicatorViewType: TSPageControlIndicatorType = .color(colors: (defaultColor: UIColor.lightGray, activeColor: UIColor.darkGray)) {
         didSet {
             self.reset()
         }
     }
-
+    
     @IBInspectable public var currentIndicator: Int = 0 {
         willSet {
             self.setIndicator(active: false, at: self.currentIndicator, animated: true)
         }
-
+        
         didSet {
             self.setIndicator(active: true, at: self.currentIndicator, animated: true)
         }
     }
-
+    
     public override var isUserInteractionEnabled: Bool {
         didSet {
             self.subviews.forEach {
@@ -99,13 +99,13 @@ public class TSPageControl: UIView {
             }
         }
     }
-
+    
     private var indicators: [UIView] = [UIView]()
-
+    
     private func setup() {
         self.setIndicator(active: true, at: self.currentIndicator, animated: false)
     }
-
+    
     private func setIndicator(active: Bool, at index: Int, animated: Bool) {
         guard self.currentIndicator >= 0 && self.currentIndicator < self.indicators.count else {
             return
@@ -116,7 +116,7 @@ public class TSPageControl: UIView {
             print("\(type(of: self)): Unable to set active state to indicator, because it doesn't conform to TSIndicatorView protocol.")
         }
     }
-
+    
     public func reset() {
         for indicator in self.indicators {
             indicator.removeFromSuperview()
@@ -124,7 +124,7 @@ public class TSPageControl: UIView {
         self.indicators.removeAll()
         self.updateIndicators()
     }
-
+    
     private func updateIndicators() {
         let frame = self.frameForIndicators()
         for index in 0..<self.indicatorsCount {
@@ -132,7 +132,7 @@ public class TSPageControl: UIView {
             self.updatePosition(for: view, at: index, with: frame)
         }
     }
-
+    
     private func updatePosition(for indicator: UIView, at index: Int, with frame: CGRect) {
         let shift: CGFloat = self.distanceToCenter(from: index) * (index * 2 < self.indicatorsCount ? -1 : 1) // multiplier defines sign (to shift left or right)
         let x = frame.midX + shift
@@ -140,7 +140,7 @@ public class TSPageControl: UIView {
         indicator.isUserInteractionEnabled = self.isUserInteractionEnabled
         indicator.center = CGPoint(x: x, y: y)
     }
-
+    
     /** Calculates distance from frame center to center of the indicator at given index*/
     private func distanceToCenter(from index: Int) -> CGFloat {
         let center = CGFloat(floor(Float(self.indicatorsCount) / 2.0))
@@ -149,37 +149,37 @@ public class TSPageControl: UIView {
         let unitsNumber = indexDistance * 2
         return measureUnit * unitsNumber
     }
-
+    
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touchedView = touches.first?.view,
-              let index = self.indicators.index(of: touchedView), index != self.currentIndicator else {
-            return
+            let index = self.indicators.index(of: touchedView), index != self.currentIndicator else {
+                return
         }
         let prevIndex = currentIndicator
         self.currentIndicator = index
         self.delegate?.pageControl(self, didSwitchFrom: prevIndex, to: currentIndicator)
     }
-
+    
     public override var intrinsicContentSize: CGSize {
         return sizeForIndicators(adjustInsets: true)
     }
-
+    
     public override func sizeToFit() {
         let size = self.intrinsicContentSize
         self.frame = CGRect(origin: self.frame.origin, size: size)
     }
-
+    
     public override func layoutSubviews() {
         super.layoutSubviews()
         updateIndicators()
         self.setIndicator(active: true, at: self.currentIndicator, animated: false)
     }
-
+    
     private func frameForIndicators() -> CGRect {
         let size = self.sizeForIndicators(adjustInsets: false)
         return CGRect(x: (self.frame.width - size.width) / 2, y: (self.frame.height - size.height) / 2, width: size.width, height: size.height)
     }
-
+    
     private func sizeForIndicators(adjustInsets: Bool) -> CGSize {
         var width = self.indicatorsSize.width * CGFloat(self.indicatorsCount) + self.indicatorsSpacing * CGFloat(self.indicatorsCount - 1)
         var height = self.indicatorsSize.height
@@ -189,7 +189,7 @@ public class TSPageControl: UIView {
         }
         return CGSize(width: width, height: height)
     }
-
+    
     /** Retrieves indicator view at given index. */
     private func indicatorView(at index: Int) -> UIView {
         if !self.indicators.isEmpty && index >= 0 && index < self.indicators.count {
@@ -204,9 +204,9 @@ public class TSPageControl: UIView {
         case let .custom(delegate):
             indicatorView = delegate(index)
         }
-
+        
         indicatorView.frame = CGRect(origin: CGPoint.zero, size: self.indicatorsSize)
-
+        
         self.indicators.append(indicatorView)
         self.addSubview(indicatorView)
         indicatorView.isUserInteractionEnabled = true
@@ -217,31 +217,31 @@ public class TSPageControl: UIView {
 }
 
 private class TSColorIndicatorView: UIView, TSIndicatorView {
-
+    
     var defaultColor: UIColor?
     var activeColor: UIColor?
-
+    
     init(defaultColor: UIColor, activeColor: UIColor) {
         super.init(frame: CGRect.zero)
         self.setup(defaultColor: defaultColor, activeColor: activeColor)
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setup()
     }
-
+    
     private func setup(defaultColor: UIColor = UIColor.lightGray, activeColor: UIColor = UIColor.darkGray) {
         self.defaultColor = defaultColor
         self.activeColor = activeColor
         self.backgroundColor = self.defaultColor
     }
-
+    
     func changeIndicatorState(active: Bool, animated: Bool) {
         let color = active ? self.activeColor : self.defaultColor
         if animated {
@@ -251,33 +251,33 @@ private class TSColorIndicatorView: UIView, TSIndicatorView {
         } else {
             self.backgroundColor = color
         }
-
+        
     }
 }
 
 private class TSImageIndicatorView: UIImageView, TSIndicatorView {
     var defaultImage: UIImage? = nil
     var activeImage: UIImage? = nil
-
+    
     init(defaultImage: UIImage, activeImage: UIImage) {
         super.init(frame: CGRect.zero)
         self.setup(defaultImage: defaultImage, activeImage: activeImage)
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     private func setup(defaultImage: UIImage, activeImage: UIImage) {
         self.defaultImage = defaultImage
         self.activeImage = activeImage
         self.image = self.defaultImage
     }
-
+    
     func changeIndicatorState(active: Bool, animated: Bool) {
         let image = active ? self.activeImage : self.defaultImage
         if animated {
@@ -287,6 +287,6 @@ private class TSImageIndicatorView: UIImageView, TSIndicatorView {
         } else {
             self.image = image
         }
-
+        
     }
 }

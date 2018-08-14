@@ -1,18 +1,19 @@
+import UIKit
 /// `TSPageViewController`'s base delegate which provides a couple of methods to report state changes of the `TSPageViewController`.
-public protocol TSPageViewControllerBaseDelegate {
+public protocol TSPageViewControllerBaseDelegate: class {
     /**
-    Called when `pageController` finished initialization and has been embedded.
-
-    - Parameter pageController: `TSPageViewController` which triggers the delegate.
-    - Parameter controller: `UIPageViewController` which has been embedded.
-    - Parameter view: Content view into which `controller` has been embedded.
-    */
+     Called when `pageController` finished initialization and has been embedded.
+     
+     - Parameter pageController: `TSPageViewController` which triggers the delegate.
+     - Parameter controller: `UIPageViewController` which has been embedded.
+     - Parameter view: Content view into which `controller` has been embedded.
+     */
     func pageController(_ pageController : TSPageViewController, didEmbed controller : UIPageViewController, to contentView : UIView)
 }
 
 /// `TSPageViewController`'s delegate which provides a couple of methods to report state changes of the `TSPageViewController`.
 public protocol TSPageViewControllerDelegate: TSPageViewControllerBaseDelegate {
-
+    
     /**
      Called whenever user begins swiping of the page.
      
@@ -29,7 +30,7 @@ public protocol TSPageViewControllerDelegate: TSPageViewControllerBaseDelegate {
      - Important: In case swipe has been canceled `pageController` will call `pageController(_:, didCancelShowViewController:, forPageAt:) with currently displayed controller.
      */
     func pageController(_ pageController : TSPageViewController, willShow controller : UIViewController, forPageAt index : Int)
-
+    
     /**
      Called whenever `pageController` switched to new page.
      
@@ -40,7 +41,7 @@ public protocol TSPageViewControllerDelegate: TSPageViewControllerBaseDelegate {
      - Parameter index: Index of displayed `controller`.
      */
     func pageController(_ pageController : TSPageViewController, didShow controller : UIViewController, forPageAt index : Int)
-
+    
     /**
      Called whenever `pageController` was switching to new page, but canceled the switch.
      
@@ -51,7 +52,7 @@ public protocol TSPageViewControllerDelegate: TSPageViewControllerBaseDelegate {
      - Parameter index: Index of canceled `controller`.
      */
     func pageController(_ pageController : TSPageViewController, didCancelShow controller : UIViewController, forPageAt index : Int)
-
+    
 }
 
 // MARK: - Default implementation for TSPageViewControllerDelegate

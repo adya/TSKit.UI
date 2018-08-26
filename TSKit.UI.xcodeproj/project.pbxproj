@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		006182B920603EA60079DD8C /* TSKit_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006182B820603EA60079DD8C /* TSKit_Core.framework */; };
 		006182BB20603F390079DD8C /* TSKit_Log.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006182BA20603F390079DD8C /* TSKit_Log.framework */; };
+		007471192132AC1900AC9B98 /* TSPageControl.swift in Headers */ = {isa = PBXBuildFile; fileRef = 00C2C4F81FE5C56200721731 /* TSPageControl.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		0074711A2132AC1900AC9B98 /* TSPageViewController.swift in Headers */ = {isa = PBXBuildFile; fileRef = 00C2C5011FE5C56200721731 /* TSPageViewController.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		0074711B2132AC2600AC9B98 /* UIViewEx.swift in Headers */ = {isa = PBXBuildFile; fileRef = 00C2C4F91FE5C56200721731 /* UIViewEx.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		00A052282102124A00A2D648 /* UISplitViewControllerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A052272102124A00A2D648 /* UISplitViewControllerEx.swift */; };
 		00A0522E210379CD00A2D648 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A0522D210379CD00A2D648 /* BorderedButton.swift */; };
 		00C2C4C11FE5C4A600721731 /* TSKit_UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C2C4B71FE5C4A600721731 /* TSKit_UI.framework */; };
@@ -182,6 +185,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				00C2C4C81FE5C4A600721731 /* TSKit_UI.h in Headers */,
+				007471192132AC1900AC9B98 /* TSPageControl.swift in Headers */,
+				0074711A2132AC1900AC9B98 /* TSPageViewController.swift in Headers */,
+				0074711B2132AC2600AC9B98 /* UIViewEx.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

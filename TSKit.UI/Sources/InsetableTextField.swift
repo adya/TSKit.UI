@@ -3,7 +3,8 @@ import UIKit
 @IBDesignable
 public class InsetableTextField : UITextField {
     
-    @IBInspectable public var inset : CGFloat = 0
+    @IBInspectable
+    public var inset : CGFloat = 0
     
     public override func textRect(forBounds bounds : CGRect) -> CGRect {
         let defaultBounds = super.textRect(forBounds: bounds)

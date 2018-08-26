@@ -89,14 +89,14 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
     public weak var pageDataSource: TSPageViewControllerDataSource?
     
     /// Index of the currently displayed `UIViewController`.
-    fileprivate(set) var currentPageIndex: Int = -1 {
+    fileprivate(set) public var currentPage: Int = -1 {
         didSet {
-            guard currentPageIndex >= 0 else {
+            guard currentPage >= 0 else {
                 log.verbose("Not initialized.")
                 return
             }
-            log.debug("Updating current index from \(oldValue) to \(self.currentPageIndex)")
-            self.pageControl?.currentIndicator = self.currentPageIndex
+            log.debug("Updating current index from \(oldValue) to \(self.currentPage)")
+            self.pageControl?.currentIndicator = self.currentPage
             
             log.debug("Filter pages outside of visible range.")
             let filtered = currentPages.filter {
@@ -189,7 +189,7 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
     /// - Parameter index: Index of the page to be shown.
     /// - Parameter animated: Flag indicating whether transition should be animated or not.
     public func showPage(atIndex index: Int, animated: Bool = true) {
-        guard index != currentPageIndex else {
+        guard index != currentPage else {
             log.verbose("Page at specified index is already shown.")
             return
         }
@@ -199,8 +199,8 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
             return
         }
         
-        self.pageViewController?.setViewControllers([controller], direction: (self.currentPageIndex < index ? .forward : .reverse), animated: animated, completion: nil)
-        self.currentPageIndex = index
+        self.pageViewController?.setViewControllers([controller], direction: (self.currentPage < index ? .forward : .reverse), animated: animated, completion: nil)
+        self.currentPage = index
         self.pageDataSource?.pageController(self, prepareViewController: controller, at: index)
         self.pageDelegate?.pageController(self, didShow: controller, forPageAt: index)
     }
@@ -208,28 +208,28 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
     /// Convenient method to show next page.
     /// - Parameter animated: Flag indicating whether transition should be animated or not.
     public func showNextPage(animated: Bool = true) {
-        self.showPage(atIndex: self.currentPageIndex + 1, animated: animated)
+        self.showPage(atIndex: self.currentPage + 1, animated: animated)
     }
     
     /// Convenient method to show previous page.
     /// - Parameter animated: Flag indicating whether transition should be animated or not.
     public func showPrevPage(animated: Bool = true) {
-        self.showPage(atIndex: self.currentPageIndex - 1, animated: animated)
+        self.showPage(atIndex: self.currentPage - 1, animated: animated)
     }
     
     /// Reloads current page.
     public func reloadPage() {
-        guard let controller = self.viewController(at: currentPageIndex) else {
-            log.warning("Index \(self.currentPageIndex) is out of bounds [0, \(self.pagesCount)].")
+        guard let controller = self.viewController(at: currentPage) else {
+            log.warning("Index \(self.currentPage) is out of bounds [0, \(self.pagesCount)].")
             return
         }
         
-        self.pageDataSource?.pageController(self, prepareViewController: controller, at: currentPageIndex)
+        self.pageDataSource?.pageController(self, prepareViewController: controller, at: currentPage)
     }
     
     fileprivate func isVisiblePage(at index: Int) -> Bool {
-        let minIndex = max(currentPageIndex - 1, 0)
-        let maxIndex = min(currentPageIndex + 1, pagesCount - 1)
+        let minIndex = max(currentPage - 1, 0)
+        let maxIndex = min(currentPage + 1, pagesCount - 1)
         return index >= minIndex && index <= maxIndex
     }
     
@@ -388,7 +388,7 @@ private class TSPageViewControllerHelper: NSObject, UIPageViewControllerDataSour
             return
         }
         
-        self.pageController.currentPageIndex = index
+        self.pageController.currentPage = index
         self.pageController.pageDelegate?.pageController(pageController, didShow: controller, forPageAt: index)
     }
 }
@@ -402,7 +402,7 @@ private class TSPageViewControllerDefaultHelper: TSPageViewControllerHelper {
     
     @objc
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return self.pageController.currentPageIndex
+        return self.pageController.currentPage
     }
 }
 

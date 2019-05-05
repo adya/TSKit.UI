@@ -1,3 +1,8 @@
+/// - Since: 01/20/2018
+/// - Author: Arkadii Hlushchevskyi
+/// - Copyright: © 2018. Arkadii Hlushchevskyi.
+/// - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
+
 import UIKit
 
 /// `TSPageViewController`'s data source used to provide `UIViewController` representing a single page.

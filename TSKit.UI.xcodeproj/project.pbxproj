@@ -30,6 +30,10 @@
 		00C2C5111FE5C56300721731 /* TSPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C5011FE5C56200721731 /* TSPageViewController.swift */; };
 		00C2C5121FE5C56300721731 /* TSPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C5021FE5C56200721731 /* TSPageViewControllerDelegate.swift */; };
 		00C2C5131FE5C56300721731 /* TSPageViewControllerDataSoruce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2C5031FE5C56200721731 /* TSPageViewControllerDataSoruce.swift */; };
+		00CCC5852286D1510035A700 /* UIView+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC5812286D1510035A700 /* UIView+Keyboard.swift */; };
+		00CCC5862286D1510035A700 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC5822286D1510035A700 /* Keyboard.swift */; };
+		00CCC5872286D1510035A700 /* KeyboardPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC5832286D1510035A700 /* KeyboardPresenterDelegate.swift */; };
+		00CCC5882286D1510035A700 /* KeyboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC5842286D1510035A700 /* KeyboardPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +72,10 @@
 		00C2C5011FE5C56200721731 /* TSPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSPageViewController.swift; sourceTree = "<group>"; };
 		00C2C5021FE5C56200721731 /* TSPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSPageViewControllerDelegate.swift; sourceTree = "<group>"; };
 		00C2C5031FE5C56200721731 /* TSPageViewControllerDataSoruce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSPageViewControllerDataSoruce.swift; sourceTree = "<group>"; };
+		00CCC5812286D1510035A700 /* UIView+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Keyboard.swift"; sourceTree = "<group>"; };
+		00CCC5822286D1510035A700 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		00CCC5832286D1510035A700 /* KeyboardPresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardPresenterDelegate.swift; sourceTree = "<group>"; };
+		00CCC5842286D1510035A700 /* KeyboardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,7 @@
 		00C2C4F21FE5C55700721731 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				00CCC5802286D1450035A700 /* Keyboard */,
 				00CCB2951FE6C2B800F1E75C /* UIKit+Identifiable */,
 				00C2C4FC1FE5C56200721731 /* _TSCollaspableTableView.swift */,
 				00C2C4F41FE5C56200721731 /* _TSOptionButton.swift */,
@@ -176,6 +185,17 @@
 				00C2C4FA1FE5C56200721731 /* UICollectionView+Identifiable.swift */,
 			);
 			path = "UIKit+Identifiable";
+			sourceTree = "<group>";
+		};
+		00CCC5802286D1450035A700 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				00CCC5842286D1510035A700 /* KeyboardPresenter.swift */,
+				00CCC5832286D1510035A700 /* KeyboardPresenterDelegate.swift */,
+				00CCC5822286D1510035A700 /* Keyboard.swift */,
+				00CCC5812286D1510035A700 /* UIView+Keyboard.swift */,
+			);
+			path = Keyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,12 +321,16 @@
 				00C2C50C1FE5C56300721731 /* UITableView+Identifiable.swift in Sources */,
 				00A0522E210379CD00A2D648 /* BorderedButton.swift in Sources */,
 				00A052282102124A00A2D648 /* UISplitViewControllerEx.swift in Sources */,
+				00CCC5872286D1510035A700 /* KeyboardPresenterDelegate.swift in Sources */,
 				00C2C5111FE5C56300721731 /* TSPageViewController.swift in Sources */,
 				00C2C5091FE5C56200721731 /* TSPageControl.swift in Sources */,
+				00CCC5882286D1510035A700 /* KeyboardPresenter.swift in Sources */,
+				00CCC5862286D1510035A700 /* Keyboard.swift in Sources */,
 				00C2C50B1FE5C56200721731 /* UICollectionView+Identifiable.swift in Sources */,
 				00C2C5131FE5C56300721731 /* TSPageViewControllerDataSoruce.swift in Sources */,
 				00C2C5061FE5C56200721731 /* InsetableTextField.swift in Sources */,
 				00C2C5121FE5C56300721731 /* TSPageViewControllerDelegate.swift in Sources */,
+				00CCC5852286D1510035A700 /* UIView+Keyboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

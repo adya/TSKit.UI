@@ -4,7 +4,7 @@
 /// - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
 
 import UIKit
-import TSKit_Log
+//import TSKit_Log
 
 /**
  `UIViewController` subclass designed to simplify implementation of `UIPageViewController` via embedding it into self and providing various methods for configuration.
@@ -47,7 +47,7 @@ import TSKit_Log
  */
 
 @IBDesignable
-public class TSPageViewController: UIViewController, TSPageControlDelegate, Loggable {
+public class TSPageViewController: UIViewController, TSPageControlDelegate {
     
     /// Custom page control to be used as page indicator.
     /// - Note: If set to nil and `useDefaultPageIndicator = false` there won't be any indicator.
@@ -97,23 +97,23 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
     fileprivate(set) public var currentPage: Int = -1 {
         didSet {
             guard currentPage >= 0 else {
-                log.verbose("Not initialized.")
+                // log.verbose("Not initialized.")
                 return
             }
-            log.debug("Updating current index from \(oldValue) to \(self.currentPage)")
+            // // log.debug("Updating current index from \(oldValue) to \(self.currentPage)")
             self.pageControl?.currentIndicator = self.currentPage
             
-            log.debug("Filter pages outside of visible range.")
+            // // log.debug("Filter pages outside of visible range.")
             let filtered = currentPages.filter {
                 let notVisible = !self.isVisiblePage(at: $0.index)
-                log.debug("Page \($0.index) is \(notVisible ? "not " : "")visible")
+                // log.debug("Page \($0.index) is \(notVisible ? "not " : "")visible")
                 return notVisible
             }
             
-            log.debug("No longer visible pages: \(filtered).")
+            // log.debug("No longer visible pages: \(filtered).")
             
             let ids = filtered.map({$0.page.identifier}).distinct
-            log.debug("Adding non-visible pages to reusable pool.")
+            // log.debug("Adding non-visible pages to reusable pool.")
             ids.forEach { id in
                 
                 if self.reusablePageViewControllers[id] == nil {
@@ -124,13 +124,13 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
                     self.reusablePageViewControllers[id] = reusable + filtered.map { $0.page }
                 }
             }
-            log.debug("Reusable pool: \(self.reusablePageViewControllers)")
+            // log.debug("Reusable pool: \(self.reusablePageViewControllers)")
             
-            log.debug("Remove non-visible pages from used pool.")
+            // log.debug("Remove non-visible pages from used pool.")
             self.currentPages = self.currentPages.filter { dequeuedPage in
                 !filtered.contains(where: { $0.page.controller == dequeuedPage.page.controller })
             }
-            log.debug("Visible pages: \(self.currentPages)")
+            // log.debug("Visible pages: \(self.currentPages)")
         }
     }
     
@@ -143,16 +143,16 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
     /// Currently used instantiated `UIViewController`s.
     private var currentPages = [DequeuedPage]() {
         didSet {
-            log.debug("Used pages: Count = \(self.currentPages.count)")
-            log.debug("Used pages: \(self.currentPages)")
+            // log.debug("Used pages: Count = \(self.currentPages.count)")
+            // log.debug("Used pages: \(self.currentPages)")
         }
     }
     
     /// `UIViewController`s ready to be reused.
     private var reusablePageViewControllers = [String: [Page]]() {
         didSet {
-            log.debug("Reusable pages: Count = \(self.reusablePageViewControllers.count)")
-            log.debug("Reusable pages: \(self.reusablePageViewControllers)")
+            // log.debug("Reusable pages: Count = \(self.reusablePageViewControllers.count)")
+            // log.debug("Reusable pages: \(self.reusablePageViewControllers)")
             
         }
     }
@@ -187,7 +187,7 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
         
         pageDelegate?.pageController(self, didEmbed: self.pageViewController, to: targetView)
         //        showPage(atIndex: 0)
-        log.verbose("Page controller did embed UIPageViewController to \(viewName)")
+        // log.verbose("Page controller did embed UIPageViewController to \(viewName)")
     }
     
     /// Shows page at given index.
@@ -195,12 +195,12 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
     /// - Parameter animated: Flag indicating whether transition should be animated or not.
     public func showPage(atIndex index: Int, animated: Bool = true) {
         guard index != currentPage else {
-            log.verbose("Page at specified index is already shown.")
+            // log.verbose("Page at specified index is already shown.")
             return
         }
         
         guard let controller = self.viewController(at: index) else {
-            log.warning("Index \(index) is out of bounds [0, \(self.pagesCount)].")
+            // log.warning("Index \(index) is out of bounds [0, \(self.pagesCount)].")
             return
         }
         
@@ -225,7 +225,7 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
     /// Reloads current page.
     public func reloadPage() {
         guard let controller = self.viewController(at: currentPage) else {
-            log.warning("Index \(self.currentPage) is out of bounds [0, \(self.pagesCount)].")
+            // log.warning("Index \(self.currentPage) is out of bounds [0, \(self.pagesCount)].")
             return
         }
         
@@ -279,35 +279,35 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
             return nil
         }
         
-        log.debug("Obtaining viewController at index \(index)")
+        // log.debug("Obtaining viewController at index \(index)")
         
         
         if let dequeuedPage = currentPages.first(where: { $0.index == index }) {
-            log.debug("Using visible page.")
+            // log.debug("Using visible page.")
             return dequeuedPage.page.controller
         }
         
-        log.debug("Requesting identifier")
+        // log.debug("Requesting identifier")
         guard let identifier = pageDataSource?.pageController(self, reuseIdentifierForPageAt: index) else {
-            log.verbose("DataSource was not set.")
+            // log.verbose("DataSource was not set.")
             return nil
         }
         
-        log.debug("Trying to find reusable controller for that page with identifier '\(identifier)'.")
+        // log.debug("Trying to find reusable controller for that page with identifier '\(identifier)'.")
         if let viewController = reusablePageViewControllers[identifier]?.first?.controller {
-            log.debug("Found")
-            log.debug("Adding new controller to active pages at index \(index) with identifier '\(identifier)'.")
+            // log.debug("Found")
+            // log.debug("Adding new controller to active pages at index \(index) with identifier '\(identifier)'.")
             reusablePageViewControllers[identifier]?.removeFirst().controller
             currentPages.append(DequeuedPage(index: index, Page(identifier: identifier, controller: viewController)))
             return viewController
         } else {
-            log.debug("Requesting new controller for identifier '\(identifier)'.")
+            // log.debug("Requesting new controller for identifier '\(identifier)'.")
             guard let viewController = pageDataSource?.pageController(self, viewControllerWithReuseIdentifier: identifier) else {
-                log.warning("Failed to get view controller for page with identifier \(identifier).")
+                // log.warning("Failed to get view controller for page with identifier \(identifier).")
                 return nil
             }
             
-            log.debug("Adding new controller to active pages at index \(index) with identifier '\(identifier)'.")
+            // log.debug("Adding new controller to active pages at index \(index) with identifier '\(identifier)'.")
             currentPages.append(DequeuedPage(index: index, Page(identifier: identifier, controller: viewController)))
             return viewController
         }
@@ -317,7 +317,7 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate, Logg
     /// Handles taps on `pageControl`'s indicators to switch pages.
     public func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
         guard self.allowPageControlSwitchPages else {
-            log.warning("Page switching disabled by allowPageControlSwitchPages property.")
+            // log.warning("Page switching disabled by allowPageControlSwitchPages property.")
             return
         }
         self.showPage(atIndex: toIndex)
@@ -343,9 +343,9 @@ private class TSPageViewControllerHelper: NSObject, UIPageViewControllerDataSour
     
     @objc
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        //        pageController.log.debug("Requesting viewController after \(viewController)")
+        //        pageController.// log.debug("Requesting viewController after \(viewController)")
         if let index = self.pageController.pageIndex(for: viewController) {
-            //            pageController.log.debug("Index of this controller is \(index)")
+            //            pageController.// log.debug("Index of this controller is \(index)")
             let next = index + 1
             let controller = self.pageController.viewController(at: next)
             if let controller = controller {
@@ -358,9 +358,9 @@ private class TSPageViewControllerHelper: NSObject, UIPageViewControllerDataSour
     
     @objc
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        //        pageController.log.debug("Requesting viewController before \(viewController)")
+        //        pageController.// log.debug("Requesting viewController before \(viewController)")
         if let index = self.pageController.pageIndex(for: viewController) {
-            //            pageController.log.debug("Index of this controller is \(index)")
+            //            pageController.// log.debug("Index of this controller is \(index)")
             let prev = index - 1
             let controller = self.pageController.viewController(at: prev)
             if let controller = controller {

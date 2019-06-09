@@ -13,6 +13,7 @@
 		0074711A2132AC1900AC9B98 /* TSPageViewController.swift in Headers */ = {isa = PBXBuildFile; fileRef = 00C2C5011FE5C56200721731 /* TSPageViewController.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		0074711B2132AC2600AC9B98 /* UIViewEx.swift in Headers */ = {isa = PBXBuildFile; fileRef = 00C2C4F91FE5C56200721731 /* UIViewEx.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		0074711C2132ADE900AC9B98 /* BorderedButton.swift in Headers */ = {isa = PBXBuildFile; fileRef = 00A0522D210379CD00A2D648 /* BorderedButton.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		00848FC12299884000792071 /* UIViewController+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00848FC02299884000792071 /* UIViewController+NavigationBar.swift */; };
 		00A052282102124A00A2D648 /* UISplitViewControllerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A052272102124A00A2D648 /* UISplitViewControllerEx.swift */; };
 		00A0522E210379CD00A2D648 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A0522D210379CD00A2D648 /* BorderedButton.swift */; };
 		00C2C4C11FE5C4A600721731 /* TSKit_UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C2C4B71FE5C4A600721731 /* TSKit_UI.framework */; };
@@ -50,6 +51,7 @@
 		006182B820603EA60079DD8C /* TSKit_Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSKit_Core.framework; path = Carthage/Build/iOS/TSKit_Core.framework; sourceTree = "<group>"; };
 		006182BA20603F390079DD8C /* TSKit_Log.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSKit_Log.framework; path = Carthage/Build/iOS/TSKit_Log.framework; sourceTree = "<group>"; };
 		006182CA206046EB0079DD8C /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		00848FC02299884000792071 /* UIViewController+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationBar.swift"; sourceTree = "<group>"; };
 		00A052272102124A00A2D648 /* UISplitViewControllerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerEx.swift; sourceTree = "<group>"; };
 		00A0522D210379CD00A2D648 /* BorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		00C2C4B71FE5C4A600721731 /* TSKit_UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TSKit_UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,7 @@
 				00C2C4F91FE5C56200721731 /* UIViewEx.swift */,
 				00A052272102124A00A2D648 /* UISplitViewControllerEx.swift */,
 				00A0522D210379CD00A2D648 /* BorderedButton.swift */,
+				00848FC02299884000792071 /* UIViewController+NavigationBar.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				00C2C5081FE5C56200721731 /* CompletionStoryboardSegue.swift in Sources */,
 				00C2C50A1FE5C56200721731 /* UIViewEx.swift in Sources */,
 				00C2C5101FE5C56300721731 /* UIViewController+Embedding.swift in Sources */,
+				00848FC12299884000792071 /* UIViewController+NavigationBar.swift in Sources */,
 				00C2C50E1FE5C56300721731 /* UITableViewEx.swift in Sources */,
 				00C2C50C1FE5C56300721731 /* UITableView+Identifiable.swift in Sources */,
 				00A0522E210379CD00A2D648 /* BorderedButton.swift in Sources */,
@@ -484,7 +488,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glar.tskit.ui;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = NO;
+				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -509,7 +513,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glar.tskit.ui;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = NO;
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

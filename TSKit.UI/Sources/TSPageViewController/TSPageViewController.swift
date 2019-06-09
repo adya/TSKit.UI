@@ -25,6 +25,7 @@ import UIKit
  ### 1. Setup:
     1. Subclass `TSPageViewController`.
     2. Set `dataSource` to provide pages.
+    3. Call `showPage(atIndex:)` to present initial page.
 
  ### 2. Handling page switching:
     1. Do **Setup**

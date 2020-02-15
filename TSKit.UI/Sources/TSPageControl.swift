@@ -139,25 +139,26 @@ public class TSPageControl: UIView {
     }
     
     private func updatePosition(for indicator: UIView, at index: Int, with frame: CGRect) {
-        let shift: CGFloat = self.distanceToCenter(from: index) * (index * 2 < self.indicatorsCount ? -1 : 1) // multiplier defines sign (to shift left or right)
+        let shift: CGFloat = self.distanceToCenter(from: index)
         let x = frame.midX + shift
         let y = frame.midY
         indicator.isUserInteractionEnabled = self.isUserInteractionEnabled
         indicator.center = CGPoint(x: x, y: y)
     }
     
-    /** Calculates distance from frame center to center of the indicator at given index*/
+    /// Calculates distance from `bounds.center` to `center` of the indicator at given `index`.
     private func distanceToCenter(from index: Int) -> CGFloat {
-        let center = CGFloat(floor(Float(self.indicatorsCount) / 2.0))
-        let indexDistance = abs(center - CGFloat(index))
-        let measureUnit = self.indicatorsSize.width / 2 + self.indicatorsSpacing / 2 // measeureUnit represents distance between indicator center and spacing center. This will ease calculation algorithm
-        let unitsNumber = indexDistance * 2
+        let center = indicatorsCount / 2
+        let isEven = indicatorsCount % 2 == 0
+        let indexDistance = CGFloat((index + 1) - center)
+        let measureUnit = (indicatorsSize.width + indicatorsSpacing) / 2 // measeureUnit represents distance between indicator center and spacing center. This will ease calculation algorithm
+        let unitsNumber = isEven ? indexDistance * 2 - 1 : indexDistance * 2
         return measureUnit * unitsNumber
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touchedView = touches.first?.view,
-            let index = self.indicators.index(of: touchedView), index != self.currentIndicator else {
+            let index = self.indicators.firstIndex(of: touchedView), index != self.currentIndicator else {
                 return
         }
         let prevIndex = currentIndicator

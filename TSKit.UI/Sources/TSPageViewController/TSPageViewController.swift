@@ -316,7 +316,7 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate {
     
     
     /// Handles taps on `pageControl`'s indicators to switch pages.
-    public func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
+    open func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
         guard self.allowPageControlSwitchPages else {
             // log.warning("Page switching disabled by allowPageControlSwitchPages property.")
             return
@@ -326,7 +326,7 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate {
     
     
     /// Default implementation which allows subclasses to override customization.
-    public func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int) {
+    open func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int) {
         
     }
 }

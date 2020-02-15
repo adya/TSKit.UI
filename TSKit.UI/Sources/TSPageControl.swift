@@ -31,7 +31,7 @@ public extension TSPageControlDelegate {
     func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
     }
     
-    func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, atIndex index: Int) {
+    func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int) {
     }
 }
 

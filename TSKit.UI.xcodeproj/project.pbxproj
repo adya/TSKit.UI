@@ -36,6 +36,7 @@
 		00CCC5862286D1510035A700 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC5822286D1510035A700 /* Keyboard.swift */; };
 		00CCC5872286D1510035A700 /* KeyboardPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC5832286D1510035A700 /* KeyboardPresenterDelegate.swift */; };
 		00CCC5882286D1510035A700 /* KeyboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC5842286D1510035A700 /* KeyboardPresenter.swift */; };
+		00F137FF23F8394F00CA7E28 /* FilledButton.swift in Headers */ = {isa = PBXBuildFile; fileRef = 0093CA8A23F8289800E00E98 /* FilledButton.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,6 +217,7 @@
 				0074711A2132AC1900AC9B98 /* TSPageViewController.swift in Headers */,
 				0074711B2132AC2600AC9B98 /* UIViewEx.swift in Headers */,
 				0074711C2132ADE900AC9B98 /* BorderedButton.swift in Headers */,
+				00F137FF23F8394F00CA7E28 /* FilledButton.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,7 +492,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glar.tskit.ui;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -516,7 +518,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glar.tskit.ui;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

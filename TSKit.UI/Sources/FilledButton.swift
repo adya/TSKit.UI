@@ -5,10 +5,11 @@ open class FilledButton: UIButton {
 
     private var originalBackgroundColor: UIColor? {
         didSet {
-            setBackground(faded: !isEnabled, animated: false)
+            setBackground(enabled: isEnabled, animated: false)
         }
     }
 
+    @IBInspectable
     open override var backgroundColor: UIColor? {
         get {
             originalBackgroundColor
@@ -19,9 +20,17 @@ open class FilledButton: UIButton {
 
     }
     
+    @IBInspectable
     public var disabledBackgroundColor: UIColor? {
         didSet {
             setBackground(enabled: isEnabled, animated: false)
+        }
+    }
+    
+    @IBInspectable
+    public var highlightedBackgroundColor: UIColor? {
+        didSet {
+            setBackground(faded: isHighlighted, animated: false)
         }
     }
 
@@ -35,8 +44,8 @@ open class FilledButton: UIButton {
 
     open override var isHighlighted: Bool {
         willSet {
-            if isHighlighted != newValue {
-                setBackground(faded: !isEnabled || newValue, animated: true)
+            if isEnabled, isHighlighted != newValue {
+                setBackground(faded: newValue, animated: true)
             }
         }
     }
@@ -49,8 +58,6 @@ open class FilledButton: UIButton {
         }
         
         if enabled {
-            layer.backgroundColor = disabledColor
-        } else {
             layer.backgroundColor = backgroundColor
             if animated {
                 let animation = CABasicAnimation(keyPath: "backgroundColor")
@@ -59,16 +66,32 @@ open class FilledButton: UIButton {
                 animation.duration = animated ? 0.15 : 0
                 layer.add(animation, forKey: "enabling")
             }
+        } else {
+            layer.backgroundColor = disabledColor
+            if animated {
+                let animation = CABasicAnimation(keyPath: "backgroundColor")
+                animation.fromValue = backgroundColor
+                animation.toValue = disabledColor
+                animation.duration = animated ? 0.15 : 0
+                layer.add(animation, forKey: "disabling")
+            }
         }
     }
     
     private func setBackground(faded: Bool, animated: Bool) {
         guard let backgroundColor = originalBackgroundColor else { return }
 
-        let fadedColor = backgroundColor.withAlphaComponent(0.8).cgColor
+        let fadedColor = (highlightedBackgroundColor ?? backgroundColor.withAlphaComponent(0.8)).cgColor
 
         if faded {
             layer.backgroundColor = fadedColor
+            if animated {
+                let animation = CABasicAnimation(keyPath: "backgroundColor")
+                animation.fromValue = backgroundColor.cgColor
+                animation.toValue = faded
+                animation.duration = animated ? 0.15 : 0
+                layer.add(animation, forKey: "selecting")
+            }
         } else {
             layer.backgroundColor = backgroundColor.cgColor
             if animated {
@@ -76,7 +99,7 @@ open class FilledButton: UIButton {
                 animation.fromValue = fadedColor
                 animation.toValue = backgroundColor.cgColor
                 animation.duration = animated ? 0.15 : 0
-                layer.add(animation, forKey: "highlighting")
+                layer.add(animation, forKey: "deselecting")
             }
         }
     }

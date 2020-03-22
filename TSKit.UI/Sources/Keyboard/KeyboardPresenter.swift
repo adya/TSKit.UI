@@ -22,6 +22,9 @@ public class KeyboardPresenter {
         self.controller = controller
         gesture = UITapGestureRecognizer(target: self,
                                          action: #selector(dismissKeyboard))
+        gesture.cancelsTouchesInView = false
+        gesture.delaysTouchesBegan = false
+        gesture.delaysTouchesEnded = false
         controller.view.addGestureRecognizer(gesture)
 
         NotificationCenter.default.addObserver(self,

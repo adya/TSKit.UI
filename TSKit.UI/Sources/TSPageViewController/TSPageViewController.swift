@@ -48,7 +48,7 @@ import UIKit
  */
 
 @IBDesignable
-public class TSPageViewController: UIViewController, TSPageControlDelegate {
+open class TSPageViewController: UIViewController, TSPageControlDelegate {
     
     /// Custom page control to be used as page indicator.
     /// - Note: If set to nil and `useDefaultPageIndicator = false` there won't be any indicator.
@@ -168,7 +168,7 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate {
         return pageDataSource?.numberOfPages(in: self) ?? 0
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
@@ -194,7 +194,7 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate {
     /// Shows page at given index.
     /// - Parameter index: Index of the page to be shown.
     /// - Parameter animated: Flag indicating whether transition should be animated or not.
-    public func showPage(atIndex index: Int, animated: Bool = true) {
+    open func showPage(atIndex index: Int, animated: Bool = true) {
         guard index != currentPage else {
             // log.verbose("Page at specified index is already shown.")
             return
@@ -213,18 +213,18 @@ public class TSPageViewController: UIViewController, TSPageControlDelegate {
     
     /// Convenient method to show next page.
     /// - Parameter animated: Flag indicating whether transition should be animated or not.
-    public func showNextPage(animated: Bool = true) {
+    open func showNextPage(animated: Bool = true) {
         self.showPage(atIndex: self.currentPage + 1, animated: animated)
     }
     
     /// Convenient method to show previous page.
     /// - Parameter animated: Flag indicating whether transition should be animated or not.
-    public func showPrevPage(animated: Bool = true) {
+    open func showPrevPage(animated: Bool = true) {
         self.showPage(atIndex: self.currentPage - 1, animated: animated)
     }
     
     /// Reloads current page.
-    public func reloadPage() {
+    open func reloadPage() {
         guard let controller = self.viewController(at: currentPage) else {
             // log.warning("Index \(self.currentPage) is out of bounds [0, \(self.pagesCount)].")
             return

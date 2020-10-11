@@ -150,7 +150,7 @@ public class TSPageControl: UIView {
     private func distanceToCenter(from index: Int) -> CGFloat {
         let center = indicatorsCount / 2
         let isEven = indicatorsCount % 2 == 0
-        let indexDistance = CGFloat((index + 1) - center)
+        let indexDistance = CGFloat((index + (isEven ? 1 : 0)) - center)
         let measureUnit = (indicatorsSize.width + indicatorsSpacing) / 2 // measeureUnit represents distance between indicator center and spacing center. This will ease calculation algorithm
         let unitsNumber = isEven ? indexDistance * 2 - 1 : indexDistance * 2
         return measureUnit * unitsNumber
@@ -172,7 +172,7 @@ public class TSPageControl: UIView {
     
     public override func sizeToFit() {
         let size = self.intrinsicContentSize
-        self.frame = CGRect(origin: self.frame.origin, size: size)
+        self.bounds = CGRect(origin: self.bounds.origin, size: size)
     }
     
     public override func layoutSubviews() {
@@ -183,7 +183,7 @@ public class TSPageControl: UIView {
     
     private func frameForIndicators() -> CGRect {
         let size = self.sizeForIndicators(adjustInsets: false)
-        return CGRect(x: (self.frame.width - size.width) / 2, y: (self.frame.height - size.height) / 2, width: size.width, height: size.height)
+        return CGRect(x: (self.bounds.width - size.width) / 2, y: (self.bounds.height - size.height) / 2, width: size.width, height: size.height)
     }
     
     private func sizeForIndicators(adjustInsets: Bool) -> CGSize {

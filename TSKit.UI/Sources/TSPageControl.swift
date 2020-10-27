@@ -20,6 +20,12 @@
 import UIKit
 
 public protocol TSPageControlDelegate: class {
+    
+    /// Tells the `delegate` that new indicator is about to be selected.
+    /// If `delegate` wants to override default flow it should provide desired indicator to be selected instead.
+    /// - Returns: Index of the indicator to be selected.
+    func pageControl(_ pageControl: TSPageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int
+    
     func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int)
     
     func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int)
@@ -28,11 +34,12 @@ public protocol TSPageControlDelegate: class {
 // All methods are optional.
 
 public extension TSPageControlDelegate {
-    func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
-    }
     
-    func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int) {
-    }
+    func pageControl(_ pageControl: TSPageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int { toIndex }
+    
+    func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {}
+    
+    func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int) {}
 }
 
 public protocol TSIndicatorView {
@@ -105,6 +112,10 @@ public class TSPageControl: UIView {
         }
     }
     
+    /// Flag indicating whether switch occured due to programatically changing `currentPage` or by tapping page indicator.
+    /// - Note: Useful to determine origin of of `pageControl(_:didSwitchFrom:to:)` delegate method.
+    public private(set) var isUserInitiatedSwitch = true
+    
     private var indicators: [UIView] = [UIView]()
     
     private func setup() {
@@ -154,6 +165,14 @@ public class TSPageControl: UIView {
         let measureUnit = (indicatorsSize.width + indicatorsSpacing) / 2 // measeureUnit represents distance between indicator center and spacing center. This will ease calculation algorithm
         let unitsNumber = isEven ? indexDistance * 2 - 1 : indexDistance * 2
         return measureUnit * unitsNumber
+    }
+    
+    func suggestCurrentIndicator(_ index: Int) {
+        isUserInitiatedSwitch = false
+        let prevIndex = currentIndicator
+        currentIndicator = delegate?.pageControl(self, willSwitchFrom: currentIndicator, to: index) ?? index
+        delegate?.pageControl(self, didSwitchFrom: prevIndex, to: currentIndicator)
+        isUserInitiatedSwitch = true
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

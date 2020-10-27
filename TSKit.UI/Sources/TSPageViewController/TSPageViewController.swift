@@ -102,7 +102,7 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
                 return
             }
             // // log.debug("Updating current index from \(oldValue) to \(self.currentPage)")
-            self.pageControl?.currentIndicator = self.currentPage
+            self.pageControl?.suggestCurrentIndicator(self.currentPage)
             
             // // log.debug("Filter pages outside of visible range.")
             let filtered = currentPages.filter {
@@ -313,17 +313,19 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
             return viewController
         }
     }
-    
+
+    open func pageControl(_ pageControl: TSPageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int {
+        toIndex
+    }
     
     /// Handles taps on `pageControl`'s indicators to switch pages.
     open func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
-        guard self.allowPageControlSwitchPages else {
+        guard self.allowPageControlSwitchPages, pageControl.isUserInitiatedSwitch else {
             // log.warning("Page switching disabled by allowPageControlSwitchPages property.")
             return
         }
         self.showPage(atIndex: toIndex)
     }
-    
     
     /// Default implementation which allows subclasses to override customization.
     open func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int) {

@@ -29,16 +29,16 @@ public class KeyboardPresenter {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
-                                               name: .UIKeyboardWillShow,
+                                               name: UIResponder.keyboardWillShowNotification,
                                                object: nil)
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardDidShow),
-                                               name: .UIKeyboardDidShow,
+                                               name: UIResponder.keyboardDidShowNotification,
                                                object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
-                                               name: .UIKeyboardWillHide,
+                                               name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
     }
 
@@ -132,14 +132,14 @@ private extension KeyboardPresenter {
 private extension Keyboard {
 
     init?(userInfo: [AnyHashable : Any]) {
-        guard let beginFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
-              let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-              let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
-              let animation = (userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else {
+        guard let beginFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
+              let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+              let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+              let animation = (userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else {
             return nil
         }
         if #available(iOS 9.0, *) {
-            guard let isLocal = (userInfo[UIKeyboardIsLocalUserInfoKey] as? NSNumber)?.boolValue else {
+            guard let isLocal = (userInfo[UIResponder.keyboardIsLocalUserInfoKey] as? NSNumber)?.boolValue else {
                 return nil
             }
             self.isLocal = isLocal
@@ -150,14 +150,14 @@ private extension Keyboard {
         self.beginFrame = beginFrame
         self.endFrame = endFrame
         self.animationDuration = duration
-        self.animationOptions = UIViewAnimationOptions(rawValue: animation)
+        self.animationOptions = UIView.AnimationOptions(rawValue: animation)
 
     }
 }
 
-private extension UIViewAnimationOptions {
+private extension UIView.AnimationOptions {
 
-    init(curve: UIViewAnimationCurve) {
+    init(curve: UIView.AnimationCurve) {
         switch curve {
         case .easeIn:
             self = .curveEaseIn
@@ -167,6 +167,8 @@ private extension UIViewAnimationOptions {
             self = .curveEaseInOut
         case .linear:
             self = .curveLinear
+        @unknown default: self = .curveEaseIn
+               
         }
     }
 }

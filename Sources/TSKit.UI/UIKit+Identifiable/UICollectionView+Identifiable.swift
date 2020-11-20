@@ -23,7 +23,7 @@ public protocol CollectionViewElement : Identifiable {
 
 
 public extension CollectionViewElement {
-    public var dynamicSize : CGSize {
+    var dynamicSize : CGSize {
         return type(of: self).size
     }
 }
@@ -37,7 +37,7 @@ extension UICollectionReusableView : CollectionViewElement {
 
 @available(iOS 6.0, *)
 public extension UICollectionView {
-    public func dequeueReusableCell<T> (of type : T.Type, for indexPath : IndexPath) -> T where T : UICollectionViewCell {
+    func dequeueReusableCell<T> (of type : T.Type, for indexPath : IndexPath) -> T where T : UICollectionViewCell {
         let id = type.identifier
 //        let cell = self.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
 //        if let tsCell = cell as? T {
@@ -50,13 +50,13 @@ public extension UICollectionView {
     }
     
     @available(iOS 8.0, *)
-    public func dequeueReusableHeaderView<T> (of type : T.Type, for indexPath : IndexPath) -> T where T : UICollectionReusableView {
-        return self.dequeueReusableSupplementaryView(of: type, kind: UICollectionElementKindSectionHeader, for: indexPath)
+    func dequeueReusableHeaderView<T> (of type : T.Type, for indexPath : IndexPath) -> T where T : UICollectionReusableView {
+        return self.dequeueReusableSupplementaryView(of: type, kind: UICollectionView.elementKindSectionHeader, for: indexPath)
     }
     
     @available(iOS 8.0, *)
-    public func dequeueReusableFooterView<T> (of type : T.Type, for indexPath : IndexPath) -> T where T : UICollectionReusableView {
-        return self.dequeueReusableSupplementaryView(of: type, kind: UICollectionElementKindSectionFooter, for: indexPath)
+    func dequeueReusableFooterView<T> (of type : T.Type, for indexPath : IndexPath) -> T where T : UICollectionReusableView {
+        return self.dequeueReusableSupplementaryView(of: type, kind: UICollectionView.elementKindSectionFooter, for: indexPath)
     }
     
     @available(iOS 8.0, *)

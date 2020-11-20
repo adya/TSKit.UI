@@ -2,6 +2,7 @@
 // - Author: Arkadii Hlushchevskyi
 // - Copyright: © 2020. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
+import UIKit
 
 /// A `UIButton` subclass that highlights border.
 @IBDesignable

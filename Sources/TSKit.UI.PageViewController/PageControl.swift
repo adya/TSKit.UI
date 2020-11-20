@@ -19,43 +19,43 @@
 
 import UIKit
 
-public protocol TSPageControlDelegate: class {
+public protocol PageControlDelegate: class {
     
     /// Tells the `delegate` that new indicator is about to be selected.
     /// If `delegate` wants to override default flow it should provide desired indicator to be selected instead.
     /// - Returns: Index of the indicator to be selected.
-    func pageControl(_ pageControl: TSPageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int
+    func pageControl(_ pageControl: PageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int
     
-    func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int)
+    func pageControl(_ pageControl: PageControl, didSwitchFrom fromIndex: Int, to toIndex: Int)
     
-    func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int)
+    func pageControl(_ pageControl: PageControl, customizeIndicator view: UIView, at index: Int)
 }
 
 // All methods are optional.
 
-public extension TSPageControlDelegate {
+public extension PageControlDelegate {
     
-    func pageControl(_ pageControl: TSPageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int { toIndex }
+    func pageControl(_ pageControl: PageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int { toIndex }
     
-    func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {}
+    func pageControl(_ pageControl: PageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {}
     
-    func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int) {}
+    func pageControl(_ pageControl: PageControl, customizeIndicator view: UIView, at index: Int) {}
 }
 
 public protocol TSIndicatorView {
     func changeIndicatorState(active: Bool, animated: Bool)
 }
 
-public enum TSPageControlIndicatorType {
+public enum PageControlIndicatorType {
     case color(colors: (defaultColor: UIColor, activeColor: UIColor))
     case image(images: (defaultImage: UIImage, activeImage: UIImage))
     case custom(delegate: (_ index: Int) -> UIView)
 }
 
 @IBDesignable
-public class TSPageControl: UIView {
+public class PageControl: UIView {
     
-    public weak var delegate: TSPageControlDelegate?
+    public weak var delegate: PageControlDelegate?
     
     @IBInspectable public var insetsConstant: CGFloat {
         get {
@@ -88,7 +88,7 @@ public class TSPageControl: UIView {
         }
     }
     
-    public var indicatorViewType: TSPageControlIndicatorType = .color(colors: (defaultColor: UIColor.lightGray, activeColor: UIColor.darkGray)) {
+    public var indicatorViewType: PageControlIndicatorType = .color(colors: (defaultColor: UIColor.lightGray, activeColor: UIColor.darkGray)) {
         didSet {
             self.reset()
         }

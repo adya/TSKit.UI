@@ -5,23 +5,15 @@
 
 import UIKit
 
-/**
-  A handy `UIView` extension providing access to underlying `layer`'s  common properties.
-
-  - Version:    1.2
-  - Date:       11/08/2017
-  - Since:      09/23/2016
-  - Author:     AdYa
-*/
 @IBDesignable
 public extension UIView {
     
     /// Width of `UIView`'s border.
     /// - Note: This property is simple accessor for `layer`'s `borderWidth` property.
     @IBInspectable
-    public var borderWidth: CGFloat {
+    var borderWidth: CGFloat {
         get {
-            return layer.borderWidth
+            layer.borderWidth
         }
         set {
             layer.borderWidth = newValue
@@ -31,16 +23,10 @@ public extension UIView {
     /// Color of `UIView`'s borders.
     /// - Note: This property is simple accessor for `layer`'s `borderColor` property.
     @IBInspectable
-    public var borderColor: UIColor? {
+    var borderColor: UIColor? {
         get {
-            if let color = layer.borderColor {
-                return UIColor(cgColor: color)
-            }
-            else {
-                return nil
-            }
+            layer.borderColor.flatMap(UIColor.init(cgColor:))
         }
-        
         set {
             layer.borderColor = newValue?.cgColor
         }
@@ -49,7 +35,7 @@ public extension UIView {
     /// If set to `true` `UIView` will be circled by adjusting `cornerRadius`.
     /// - Returns: `true` if current `cornerRadius` matches the one required for `UIView` to be circled.
     @IBInspectable
-    public var isCircled: Bool {
+    var isCircled: Bool {
         get {
             let minDimension = min(frame.width, frame.height)
             return cornerRadius == minDimension / 2
@@ -63,9 +49,9 @@ public extension UIView {
     /// Radius of `UIView`'s corners.
     /// - Note: This property is simple accessor for `layer`'s `cornerRadius` property.
     @IBInspectable
-    public var cornerRadius: CGFloat {
+    var cornerRadius: CGFloat {
         get {
-            return layer.cornerRadius
+            layer.cornerRadius
         }
         set {
             layer.masksToBounds = newValue > 0
@@ -76,9 +62,9 @@ public extension UIView {
     /// The offset (in points) of `UIView`'s shadow.
     /// - Note: This property is simple accessor for `layer`'s `shadowOffset` property.
     @IBInspectable
-    public var shadowOffset: CGSize {
+    var shadowOffset: CGSize {
         get {
-            return layer.shadowOffset
+            layer.shadowOffset
         }
         set {
             layer.shadowOffset = newValue
@@ -88,9 +74,9 @@ public extension UIView {
     /// The opacity of `UIView`'s shadow.
     /// - Note: This property is simple accessor for `layer`'s `shadowOpacity` property.
     @IBInspectable
-    public var shadowOpacity: Float {
+    var shadowOpacity: Float {
         get {
-            return layer.shadowOpacity
+            layer.shadowOpacity
         }
         set {
             layer.shadowOpacity = newValue
@@ -100,9 +86,9 @@ public extension UIView {
     /// The blur radius (in points) used to render `UIView`'s shadow.
     /// - Note: This property is simple accessor for `layer`'s `shadowRadius` property.
     @IBInspectable
-    public var shadowRadius: CGFloat {
+    var shadowRadius: CGFloat {
         get {
-            return layer.shadowRadius
+            layer.shadowRadius
         }
         set {
             layer.shadowRadius = newValue
@@ -112,13 +98,9 @@ public extension UIView {
     /// The color of `UIView`'s shadow.
     /// - Note: This property is simple accessor for `layer`'s `shadowColor` property.
     @IBInspectable
-    public var shadowColor: UIColor? {
+    var shadowColor: UIColor? {
         get {
-            if let color = layer.shadowColor {
-                return UIColor(cgColor: color)
-            } else {
-                return nil
-            }
+            layer.shadowColor.flatMap(UIColor.init(cgColor:))
         }
         set {
             layer.shadowColor = newValue?.cgColor

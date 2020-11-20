@@ -2,7 +2,7 @@
 // - Author: Arkadii Hlushchevskyi
 // - Copyright: © 2020. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
-
+import UIKit
 import TSKit_Core
 //import TSKit_MVVM
 
@@ -39,7 +39,7 @@ public protocol TableViewElement : Identifiable {
 //}
 
 public extension TableViewElement {
-    public var dynamicHeight : CGFloat {
+    var dynamicHeight : CGFloat {
         return type(of: self).height
     }
 }
@@ -47,7 +47,7 @@ public extension TableViewElement {
 extension UITableViewCell: TableViewElement {
     
     public class var height: CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 

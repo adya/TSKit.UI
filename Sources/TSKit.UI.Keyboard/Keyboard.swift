@@ -20,7 +20,7 @@ public struct Keyboard {
     public let animationDuration: TimeInterval
     
     /// `UIViewAnimationOptions` constant that defines how the keyboard will be animated onto or off the screen.
-    public let animationOptions: UIViewAnimationOptions
+    public let animationOptions: UIView.AnimationOptions
     
     /**
      Flag that identifies whether the keyboard belongs to the current app.

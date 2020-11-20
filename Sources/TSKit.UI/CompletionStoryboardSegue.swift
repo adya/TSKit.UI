@@ -2,6 +2,7 @@
 // - Author: Arkadii Hlushchevskyi
 // - Copyright: © 2020. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
+import UIKit
 
 /// Provides a way to do post-segue actions using `completion` closure.
 public class CompletionStoryboardSegue: UIStoryboardSegue {

@@ -4,6 +4,7 @@
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
 
 import UIKit
+import TSKit_Core
 //import TSKit_Log
 
 /**
@@ -13,17 +14,17 @@ import UIKit
     * Powerful delegation for each state of `UIPageViewController`.
     * Easily embedding `UIPageViewController` into nested views.
     * Simple implementation.
-    * Provides `TSPageControl` as custom page indicator which is highly configurable.
+    * Provides `PageControl` as custom page indicator which is highly configurable.
  
  
  - Note: Designed to be subclassed.
  
  - Requires:
-     * TSPageControl.swift
+     * PageControl.swift
      * TSArchitectureBase.swift
  
  ### 1. Setup:
-    1. Subclass `TSPageViewController`.
+    1. Subclass `PageViewController`.
     2. Set `dataSource` to provide pages.
     3. Call `showPage(atIndex:)` to present initial page.
 
@@ -37,9 +38,9 @@ import UIKit
         * `pageController(_, didCancelShow:, forPageAt:)`
  
     2. Customize `pageControl`'s indicators appearance:
-        1. Set `pageControl` property to use custom `TSPageControl`.
+        1. Set `pageControl` property to use custom `PageControl`.
         2. Set `pageControl?.indicatorViewType` to one of the predefined types.
-        3. For more details see `TSPageControl`.
+        3. For more details see `PageControl`.
 
  - Version:    2.0
  - Date:       06/23/2017
@@ -47,13 +48,16 @@ import UIKit
  - Author:     AdYa
  */
 
+@available(*, deprecated, renamed: "PageViewController")
+public typealias TSPageViewController = PageViewController
+
 @IBDesignable
-open class TSPageViewController: UIViewController, TSPageControlDelegate {
+open class PageViewController: UIViewController, PageControlDelegate {
     
     /// Custom page control to be used as page indicator.
     /// - Note: If set to nil and `useDefaultPageIndicator = false` there won't be any indicator.
     @IBOutlet
-    public weak var pageControl: TSPageControl? {
+    public weak var pageControl: PageControl? {
         didSet {
             self.updatePageControl()
         }
@@ -63,7 +67,7 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
     @IBOutlet
     private weak var pageContentView: UIView!
     
-    /// If `true` `TSPaeViewController` will use default `UIPageViewController` indicator instead of custom one.
+    /// If `true` `PageViewController` will use default `UIPageViewController` indicator instead of custom one.
     /// - Note: Use it if you don't need any custom indicators.
     @IBInspectable
     public var useDefaultPageIndicator: Bool = false {
@@ -80,7 +84,7 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
         }
     }
     
-    /// When `TSPageViewController` uses custom `pageControl` this property enables or disables user interaction on `pageControl`, allowing user to switch pages by tapping on indicators.
+    /// When `PageViewController` uses custom `pageControl` this property enables or disables user interaction on `pageControl`, allowing user to switch pages by tapping on indicators.
     @IBInspectable
     public var allowPageControlSwitchPages: Bool = true {
         didSet {
@@ -88,11 +92,19 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
         }
     }
     
-    /// Delegate which will be notified about all `TSPageViewController`'s events.
-    public weak var pageDelegate: TSPageViewControllerDelegate?
+    public var cachePages: Bool = true {
+        didSet {
+            if !cachePages {
+                invalidateCache()
+            }
+        }
+    }
     
-    /// Data source providing `UIViewController` pages to `TSPageViewController`
-    public weak var pageDataSource: TSPageViewControllerDataSource?
+    /// Delegate which will be notified about all `PageViewController`'s events.
+    public weak var pageDelegate: PageViewControllerDelegate?
+    
+    /// Data source providing `UIViewController` pages to `PageViewController`
+    public weak var pageDataSource: PageViewControllerDataSource?
     
     /// Index of the currently displayed `UIViewController`.
     fileprivate(set) public var currentPage: Int = -1 {
@@ -139,7 +151,7 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
     private var pageViewController: UIPageViewController!
     
     /// Internal helper which implements `UIPageViewController`'s `Delegate` and `DataSource`.
-    private var helper: TSPageViewControllerHelper!
+    private var helper: PageViewControllerHelper!
     
     /// Currently used instantiated `UIViewController`s.
     private var currentPages = [DequeuedPage]() {
@@ -168,6 +180,10 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
         return pageDataSource?.numberOfPages(in: self) ?? 0
     }
     
+    public func invalidateCache() {
+        currentPages.removeAll()
+    }
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -175,14 +191,14 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
         updatePageControl()
         updatePageViewControllerHelper()
         
-        addChildViewController(self.pageViewController)
-        let viewName = (self.pageContentView != nil ? "root view" : "content view")
+        addChild(self.pageViewController)
+        _ = (self.pageContentView != nil ? "root view" : "content view")
         let targetView: UIView = self.pageContentView ?? self.view
         
         pageContentView = targetView   // if targetView contains root view set reference to pageContentView
         targetView.addSubview(self.pageViewController.view)
         
-        pageViewController!.didMove(toParentViewController: self)
+        pageViewController!.didMove(toParent: self)
         pageViewController!.view.translatesAutoresizingMaskIntoConstraints = false
         constraintPageContentView()
         
@@ -205,10 +221,11 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
             return
         }
         
-        self.pageViewController?.setViewControllers([controller], direction: (self.currentPage < index ? .forward : .reverse), animated: animated, completion: nil)
+        self.pageViewController?.setViewControllers([controller], direction: (self.currentPage < index ? .forward : .reverse), animated: animated, completion: { _ in
+            self.pageDelegate?.pageController(self, didShow: controller, forPageAt: index)
+        })
         self.currentPage = index
         self.pageDataSource?.pageController(self, prepareViewController: controller, at: index)
-        self.pageDelegate?.pageController(self, didShow: controller, forPageAt: index)
     }
     
     /// Convenient method to show next page.
@@ -255,7 +272,7 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
     
     /// Updates `helper` whenever configuration changes.
     private func updatePageViewControllerHelper() {
-        self.helper = self.useDefaultPageIndicator ? TSPageViewControllerDefaultHelper(parent: self) : TSPageViewControllerHelper(parent: self)
+        self.helper = self.useDefaultPageIndicator ? PageViewControllerDefaultHelper(parent: self) : PageViewControllerHelper(parent: self)
         self.pageViewController?.dataSource = self.allowGesureBasedNavigation ? self.helper : nil
         self.pageViewController?.delegate = self.helper
     }
@@ -298,8 +315,10 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
         if let viewController = reusablePageViewControllers[identifier]?.first?.controller {
             // log.debug("Found")
             // log.debug("Adding new controller to active pages at index \(index) with identifier '\(identifier)'.")
-            reusablePageViewControllers[identifier]?.removeFirst().controller
-            currentPages.append(DequeuedPage(index: index, Page(identifier: identifier, controller: viewController)))
+            reusablePageViewControllers[identifier]?.removeFirst()
+            if cachePages {
+                currentPages.append(DequeuedPage(index: index, Page(identifier: identifier, controller: viewController)))
+            }
             return viewController
         } else {
             // log.debug("Requesting new controller for identifier '\(identifier)'.")
@@ -309,17 +328,19 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
             }
             
             // log.debug("Adding new controller to active pages at index \(index) with identifier '\(identifier)'.")
-            currentPages.append(DequeuedPage(index: index, Page(identifier: identifier, controller: viewController)))
+            if cachePages {
+                currentPages.append(DequeuedPage(index: index, Page(identifier: identifier, controller: viewController)))
+            }
             return viewController
         }
     }
 
-    open func pageControl(_ pageControl: TSPageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int {
+    open func pageControl(_ pageControl: PageControl, willSwitchFrom fromIndex: Int, to toIndex: Int) -> Int {
         toIndex
     }
     
     /// Handles taps on `pageControl`'s indicators to switch pages.
-    open func pageControl(_ pageControl: TSPageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
+    open func pageControl(_ pageControl: PageControl, didSwitchFrom fromIndex: Int, to toIndex: Int) {
         guard self.allowPageControlSwitchPages, pageControl.isUserInitiatedSwitch else {
             // log.warning("Page switching disabled by allowPageControlSwitchPages property.")
             return
@@ -328,19 +349,19 @@ open class TSPageViewController: UIViewController, TSPageControlDelegate {
     }
     
     /// Default implementation which allows subclasses to override customization.
-    open func pageControl(_ pageControl: TSPageControl, customizeIndicator view: UIView, at index: Int) {
+    open func pageControl(_ pageControl: PageControl, customizeIndicator view: UIView, at index: Int) {
         
     }
 }
 
-// MARK: - TSPageViewController helpers
+// MARK: - PageViewController helpers
 /// Implements `UIPageViewController`'s `Delegate` and `DataSource`.
 
-private class TSPageViewControllerHelper: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+private class PageViewControllerHelper: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    fileprivate unowned let pageController: TSPageViewController
+    fileprivate unowned let pageController: PageViewController
     
-    init(parent: TSPageViewController) {
+    init(parent: PageViewController) {
         self.pageController = parent
     }
     
@@ -351,7 +372,7 @@ private class TSPageViewControllerHelper: NSObject, UIPageViewControllerDataSour
             //            pageController.// log.debug("Index of this controller is \(index)")
             let next = index + 1
             let controller = self.pageController.viewController(at: next)
-            if let controller = controller {
+            if controller != nil {
                 //self.pageController.pageDataSource?.pageController(self.pageController, prepareViewController: controller, at: next)
             }
             return controller
@@ -366,7 +387,7 @@ private class TSPageViewControllerHelper: NSObject, UIPageViewControllerDataSour
             //            pageController.// log.debug("Index of this controller is \(index)")
             let prev = index - 1
             let controller = self.pageController.viewController(at: prev)
-            if let controller = controller {
+            if controller != nil {
                 //self.pageController.pageDataSource?.pageController(self.pageController, prepareViewController: controller, at: prev)
             }
             return controller
@@ -402,7 +423,7 @@ private class TSPageViewControllerHelper: NSObject, UIPageViewControllerDataSour
 }
 
 /// Implements `UIPageViewController`'s `Delegate` and `DataSource` and enables default `UIPageViewController`'s page indicator.
-private class TSPageViewControllerDefaultHelper: TSPageViewControllerHelper {
+private class PageViewControllerDefaultHelper: PageViewControllerHelper {
     @objc
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return self.pageController.pagesCount

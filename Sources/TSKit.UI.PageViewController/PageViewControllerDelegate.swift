@@ -4,6 +4,7 @@
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
 
 import UIKit
+
 /// `PageViewController`'s base delegate which provides a couple of methods to report state changes of the `PageViewController`.
 public protocol PageViewControllerBaseDelegate: class {
     /**

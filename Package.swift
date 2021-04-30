@@ -24,13 +24,14 @@ let package = Package(
     targets: [
         .target(
             name: "TSKit.UI",
-            dependencies: ["TSKit.Core", "TSKit.Log"]),
+            dependencies: ["TSKit.Core", "TSKit.Log"],
+            exclude: ["WIP"]),
         .target(
             name: "TSKit.UI.Keyboard",
             dependencies: []),
         .target(
             name: "TSKit.UI.PageViewController",
-            dependencies: []),
+            dependencies: ["TSKit.Core"]),
         .testTarget(
             name: "TSKit.UITests",
             dependencies: ["TSKit.UI"]),

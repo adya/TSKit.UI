@@ -6,7 +6,7 @@ import UIKit
 
 /// A `UIButton` subclass that highlights border.
 @IBDesignable
-public class BorderedButton: UIButton {
+open class BorderedButton: UIButton {
     
     private var originalBorderColor: UIColor? {
         didSet {
@@ -24,7 +24,7 @@ public class BorderedButton: UIButton {
         
     }
     
-    override public var isEnabled: Bool {
+    override open var isEnabled: Bool {
         didSet {
             if isEnabled != oldValue {
                 setBorder(faded: !isEnabled, animated: true)
@@ -32,7 +32,7 @@ public class BorderedButton: UIButton {
         }
     }
     
-    override public var isHighlighted: Bool {
+    override open var isHighlighted: Bool {
         didSet {
             if isHighlighted != oldValue {
                 setBorder(faded: !isEnabled || isHighlighted, animated: true)

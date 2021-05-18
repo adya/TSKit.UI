@@ -21,11 +21,11 @@ public extension UITraitCollection {
         horizontalSizeClass == .regular
     }
 
-    /// Flag that indicates whether given trait collection corresponds to compact layout in vertical dimension.
+    /// Flag that indicates whether given trait collection corresponds to compact layout in any dimension.
     ///
     /// This layout is asscoiated with standard iPhones in any orientation or iPhones Max in portrait orientation.
     var isCompactLayout: Bool {
-        verticalSizeClass == .compact
+        verticalSizeClass == .compact || horizontalSizeClass == .compact
     }
 }
 #endif

@@ -18,7 +18,7 @@ let package = Package(
             targets: ["TSKit.UI.PageViewController"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/adya/TSKit.Core.git", .upToNextMajor(from: "2.3.0")),
+        .package(url: "https://github.com/adya/TSKit.Core.git", .upToNextMajor(from: "2.3.1")),
         .package(url: "https://github.com/adya/TSKit.Log.git", .upToNextMajor(from: "2.3.0")),
     ],
     targets: [

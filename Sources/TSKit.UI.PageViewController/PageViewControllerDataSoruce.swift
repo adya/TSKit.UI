@@ -1,8 +1,8 @@
 // - Since: 01/20/2018
 // - Author: Arkadii Hlushchevskyi
-// - Copyright: © 2020. Arkadii Hlushchevskyi.
+// - Copyright: © 2021. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
-
+#if os(iOS)
 import UIKit
 
 /// `PageViewController`'s data source used to provide `UIViewController` representing a single page.
@@ -39,3 +39,4 @@ public protocol PageViewControllerDataSource: class {
      */
     func pageController(_  pageController: PageViewController, reuseIdentifierForPageAt index: Int) -> String
 }
+#endif

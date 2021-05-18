@@ -2,6 +2,7 @@
 // - Author: Arkadii Hlushchevskyi
 // - Copyright: © 2021. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
+#if os(iOS)
 import UIKit
 
 public extension UITraitCollection {
@@ -27,3 +28,4 @@ public extension UITraitCollection {
         verticalSizeClass == .compact
     }
 }
+#endif

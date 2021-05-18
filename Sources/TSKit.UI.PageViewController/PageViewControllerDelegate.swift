@@ -1,8 +1,8 @@
 // - Since: 01/20/2018
 // - Author: Arkadii Hlushchevskyi
-// - Copyright: © 2020. Arkadii Hlushchevskyi.
+// - Copyright: © 2021. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
-
+#if os(iOS)
 import UIKit
 
 /// `PageViewController`'s base delegate which provides a couple of methods to report state changes of the `PageViewController`.
@@ -72,3 +72,4 @@ public extension PageViewControllerDelegate {
     func pageController(_ pageController : PageViewController, didShow controller : UIViewController, forPageAt index : Int) {}
     func pageController(_ pageController : PageViewController, didCancelShow controller : UIViewController, forPageAt index : Int) {}
 }
+#endif

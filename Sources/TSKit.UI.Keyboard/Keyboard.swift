@@ -1,8 +1,8 @@
 // - Since: 8/19/2018
 // - Author: Arkadii Hlushchevskyi
-// - Copyright: © 2020. Arkadii Hlushchevskyi.
+// - Copyright: © 2021. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.Keyboard/blob/master/LICENSE.md
-
+#if os(iOS)
 import UIKit
 
 /// An object containing information about keyboard appearance.
@@ -32,3 +32,4 @@ public struct Keyboard {
     
     private init?() { return nil }
 }
+#endif

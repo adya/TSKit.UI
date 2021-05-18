@@ -1,8 +1,8 @@
 // - Since: 8/19/2018
 // - Author: Arkadii Hlushchevskyi
-// - Copyright: © 2020. Arkadii Hlushchevskyi.
+// - Copyright: © 2021. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.Keyboard/blob/master/LICENSE.md
-
+#if os(iOS)
 import CoreGraphics
 
 /// Conformance to `KeyboardPresenterDelegate` enables conforming object to adopt keyboard behavior.
@@ -71,3 +71,4 @@ public extension KeyboardPresenterDelegate {
                            willOverlapFirstResponderFor overlap: CGFloat,
                            whenPresenting keyboard: Keyboard) {}
 }
+#endif

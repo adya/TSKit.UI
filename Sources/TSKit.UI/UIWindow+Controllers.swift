@@ -1,8 +1,8 @@
 // - Since: 01/20/2018
 // - Author: Arkadii Hlushchevskyi
-// - Copyright: © 2020. Arkadii Hlushchevskyi.
+// - Copyright: © 2021. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
-
+#if os(iOS)
 import UIKit
 import TSKit_Core
 
@@ -110,3 +110,4 @@ public extension UIView {
         return traverse(self)
     }
 }
+#endif

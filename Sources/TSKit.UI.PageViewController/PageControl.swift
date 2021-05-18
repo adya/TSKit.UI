@@ -1,6 +1,6 @@
 // - Since: 01/20/2018
 // - Author: Arkadii Hlushchevskyi
-// - Copyright: © 2020. Arkadii Hlushchevskyi.
+// - Copyright: © 2021. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.UI/blob/master/LICENSE.md
 
 /// TODO: Description... 9/24/16.
@@ -16,7 +16,7 @@
  2. Provide this custom view in dataSource.indicatorViewForIndex method
  3. Enjoy your custom indicators.
  */
-
+#if os(iOS)
 import UIKit
 
 public protocol PageControlDelegate: class {
@@ -315,3 +315,4 @@ private class TSImageIndicatorView: UIImageView, TSIndicatorView {
         
     }
 }
+#endif

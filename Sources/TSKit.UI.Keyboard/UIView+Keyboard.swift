@@ -1,8 +1,8 @@
 // - Since: 8/19/2018
 // - Author: Arkadii Hlushchevskyi
-// - Copyright: © 2020. Arkadii Hlushchevskyi.
+// - Copyright: © 2021. Arkadii Hlushchevskyi.
 // - Seealso: https://github.com/adya/TSKit.Keyboard/blob/master/LICENSE.md
-
+#if os(iOS)
 import UIKit
 
 // MARK: - UIView animation
@@ -26,3 +26,4 @@ public extension UIView {
         animate(along: keyboard, delay: delay, animations: animations, completion: nil)
     }
 }
+#endif

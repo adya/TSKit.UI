@@ -65,6 +65,7 @@ open class FilledButton: UIButton {
         if enabled {
             layer.backgroundColor = backgroundColor
             if animated {
+                layer.removeAllAnimations()
                 let animation = CABasicAnimation(keyPath: "backgroundColor")
                 animation.fromValue = disabledColor
                 animation.toValue = backgroundColor
@@ -74,6 +75,7 @@ open class FilledButton: UIButton {
         } else {
             layer.backgroundColor = disabledColor
             if animated {
+                layer.removeAllAnimations()
                 let animation = CABasicAnimation(keyPath: "backgroundColor")
                 animation.fromValue = backgroundColor
                 animation.toValue = disabledColor
@@ -91,6 +93,7 @@ open class FilledButton: UIButton {
         if faded {
             layer.backgroundColor = fadedColor
             if animated {
+                layer.removeAllAnimations()
                 let animation = CABasicAnimation(keyPath: "backgroundColor")
                 animation.fromValue = backgroundColor.cgColor
                 animation.toValue = faded
@@ -100,6 +103,7 @@ open class FilledButton: UIButton {
         } else {
             layer.backgroundColor = backgroundColor.cgColor
             if animated {
+                layer.removeAllAnimations()
                 let animation = CABasicAnimation(keyPath: "backgroundColor")
                 animation.fromValue = fadedColor
                 animation.toValue = backgroundColor.cgColor
